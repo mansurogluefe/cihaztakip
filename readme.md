@@ -1,1 +1,2 @@
-Bu bir test uygulamasıdır lütfen isnirmeyin kullanmayın
+Bu bir test uygulamasıdır lütfen isnirmeyins
+ kullanmayın
