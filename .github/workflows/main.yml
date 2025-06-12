@@ -1,33 +1,24 @@
-name: Build Android APK
+name: Delete All Files
 
 on:
-  push:
-    branches:
-      - main  # Eğer senin branch'in master ise burayı 'master' yap
+  workflow_dispatch:
 
 jobs:
-  build:
-    name: Build APK
+  delete:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
+      - name: Delete all files
+        run: |
+          rm -rf ./*
+          rm -rf .github
 
-      - name: Grant execute permission to gradlew
-        run: chmod +x ./gradlew
-
-      - name: Build APK (Debug)
-        run: ./gradlew assembleDebug
-
-      - name: Upload Debug APK
-        uses: actions/upload-artifact@v3
-        with:
-          name: debug-apk
-          path: app/build/outputs/apk/debug/*.apk
+      - name: Commit deletion
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add -A
+          git commit -m "💣 Tüm dosyalar silindi - otomatik temizlik"
+          git push
