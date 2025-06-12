@@ -1,0 +1,24 @@
+name: Delete All Files
+
+on:
+  workflow_dispatch:
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Delete all files
+        run: |
+          rm -rf ./*
+          rm -rf .github
+
+      - name: Commit deletion
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add -A
+          git commit -m "💣 Tüm dosyalar silindi - otomatik temizlik"
+          git push
