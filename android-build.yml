@@ -20,7 +20,7 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Grant execute permission to gradlew
+      - name: Grant execute permission to sgradlew
         run: chmod +x ./gradlew
 
       - name: Build APK (Debug)
